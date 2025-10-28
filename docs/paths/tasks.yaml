@@ -1,7 +1,7 @@
 get:
   summary: List all tasks
   tags:
-    - Tasks
+    - tasks
   parameters:
     - name: completed
       in: query
@@ -29,7 +29,7 @@ get:
 post:
   summary: Create a new task
   tags:
-    - Tasks
+    - tasks
   requestBody:
     required: true
     content:

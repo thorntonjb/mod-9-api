@@ -1,0 +1,13 @@
+description: Task not found
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Not Found Error
+        details:
+          type: array
+          items:
+            type: string

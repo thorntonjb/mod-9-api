@@ -15,7 +15,7 @@ paths:
     get:
       summary: List all tasks
       tags:
-        - Tasks
+        - tasks
       parameters:
         - name: completed
           in: query
@@ -43,7 +43,7 @@ paths:
     post:
       summary: Create a new task
       tags:
-        - Tasks
+        - tasks
       requestBody:
         required: true
         content:
@@ -59,6 +59,32 @@ paths:
                 $ref: '#/components/schemas/Task'
         '400':
           $ref: '#/components/responses/BadRequest'
+  /tasks/{id}:
+    get:
+      summary: Retrives a single task by its id
+      tags:
+        - tasks
+      parameters:
+        - name: id
+          in: param
+          required: true
+          description: Retrieve one task from id
+          schema:
+            type: integer
+            example: 3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
 components:
   schemas:
     Task:
@@ -91,3 +117,17 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ValidationError'
+    NotFoundError:
+      description: Task not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Not Found Error
+              details:
+                type: array
+                items:
+                  type: string
